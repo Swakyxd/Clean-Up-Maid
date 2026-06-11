@@ -28,7 +28,9 @@ then relaunch the app.
 - Pick a duration (30 sec – 5 min) and hit **Start Cleaning**.
 - A fullscreen overlay appears on every display with the maid, sparkles, and a countdown.
 - All keyboard, trackpad, and mouse input is swallowed by a CGEvent tap —
-  clicks, keys, scrolling, even cursor movement.
+  clicks, keys, scrolling, cursor movement, media/function keys (volume,
+  brightness, play), and trackpad gestures (pinch, swipe, smart zoom,
+  force click).
 - The lock ends when the timer runs out, or **type M-A-I-D** to unlock early
   (the letters light up on screen as you type them).
 
@@ -37,3 +39,12 @@ then relaunch the app.
 - The unlock sequence (M-A-I-D) always works, even on the "until timer" lock.
 - If the app quits or crashes for any reason, macOS automatically removes the
   event tap and your input comes right back.
+- Hardware-level controls (Touch ID / power button, lid sensor) can't be
+  intercepted by any app — avoid them while wiping.
+
+## After rebuilding
+
+Re-signing changes the binary, so macOS may silently revoke the app's
+Accessibility permission. If the lock doesn't engage after a rebuild, toggle
+CleanUpMaid off and on in System Settings → Privacy & Security → Accessibility
+and relaunch.

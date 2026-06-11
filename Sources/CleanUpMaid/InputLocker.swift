@@ -30,7 +30,14 @@ final class InputLocker {
             .otherMouseDown, .otherMouseUp, .otherMouseDragged,
             .mouseMoved, .scrollWheel,
         ]
-        let mask: CGEventMask = types.reduce(0) { $0 | (CGEventMask(1) << $1.rawValue) }
+        var mask: CGEventMask = types.reduce(0) { $0 | (CGEventMask(1) << $1.rawValue) }
+        // Some input arrives as event types CGEventType has no case for:
+        // 14 NX_SYSDEFINED (media/function keys), 18 rotate,
+        // 19/20 begin/end gesture, 29 gesture, 30 magnify, 31 swipe,
+        // 32 smart-magnify, 33 quick look, 34 pressure (force click).
+        for raw: UInt64 in [14, 18, 19, 20, 29, 30, 31, 32, 33, 34] {
+            mask |= CGEventMask(1) << raw
+        }
 
         let callback: CGEventTapCallBack = { _, type, event, refcon in
             let locker = Unmanaged<InputLocker>.fromOpaque(refcon!).takeUnretainedValue()
