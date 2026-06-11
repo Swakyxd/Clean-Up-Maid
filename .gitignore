@@ -1,4 +1,5 @@
 .build/
 .swiftpm/
 CleanUpMaid.app/
+CleanUpMaid.dmg
 .DS_Store

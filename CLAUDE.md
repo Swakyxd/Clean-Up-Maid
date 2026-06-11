@@ -12,10 +12,11 @@ CleanUpMaid is a macOS app (Swift Package, SwiftUI + AppKit, macOS 13+) that loc
 swift build                 # debug build (compile check)
 ./build-app.sh              # release build + assemble CleanUpMaid.app + ad-hoc codesign
 open CleanUpMaid.app        # run it
+./make-dmg.sh               # build + package CleanUpMaid.dmg (drag-to-Applications installer)
 swift scripts/generate-icon.swift   # regenerate icon_1024.png (AppIcon.icns is built from it)
 ```
 
-There are no tests or linters. The app bundle's Info.plist is generated inline by `build-app.sh` (heredoc) — edit it there, not in `CleanUpMaid.app/`, which is a build artifact checked into the repo.
+There are no tests or linters. The app bundle's Info.plist is generated inline by `build-app.sh` (heredoc) — edit it there, not in `CleanUpMaid.app/`, which is a gitignored build artifact.
 
 Running the app requires Accessibility permission (System Settings → Privacy & Security → Accessibility). Re-signing changes the binary, so permission may need to be re-granted after rebuilds.
 

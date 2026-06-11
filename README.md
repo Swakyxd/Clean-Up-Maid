@@ -10,6 +10,13 @@ wipe them down — while an animated maid sweeps your screen and keeps you compa
 open CleanUpMaid.app
 ```
 
+Or build an installer disk image — open it and drag CleanUpMaid to Applications:
+
+```sh
+./make-dmg.sh
+open CleanUpMaid.dmg
+```
+
 To regenerate the app icon and install to /Applications:
 
 ```sh
